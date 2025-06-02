@@ -1,5 +1,7 @@
 import Header from "./components/header"
+import ProductCard from "./components/product-card"
 import "./index.css"
+import "@/lib/lazy.ts"
 
 export function App() {
 	return (
@@ -14,18 +16,21 @@ export function App() {
 				<p className="text-md text-gray-500">
 					Explora el nostre menú i fes la teva comanda ara mateix!
 				</p>
-				<div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
-					<div>
-						<img
-							src="./assets/arroz-costilla-setas-frontal.webp"
-							alt="Arroz con magro y setas de Cursus"
-							className="w-full h-auto mt-8 rounded-lg shadow-lg"
-						/>
-
-						<h3>Arroz con magro y setas</h3>
-
-					</div>
-				</div>
+				<section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8">
+					<ProductCard 
+						product={{
+							url: "/",
+							image: "./assets/arroz-costilla-setas-frontal.webp",
+							title: "Arroz con magro y setas",
+							weight: "420g",
+							price: "6,99€",
+							kilocalories: "714",
+							fat: "41g",
+							carbohydrates: "64g",
+							proteins: "23g"
+						}}
+					/>
+				</section>
 			</main>
 		</div>
 	)

@@ -27,9 +27,24 @@ const server = serve({
 				message: `Hello, ${name}!`,
 			})
 		},
-    
+		// Serve static files from assets
+		"/assets/*": async (req) => {
+			const path = __dirname + ("./assets" + req.url.replace(new URL(req.url).origin + "/assets", "")).replace(".", "")
+
+			
+			if (await (Bun.file(path).exists())) {
+				const file = Bun.file(path)
+				const contentType = file.type;
+				return new Response(await file.arrayBuffer(), {
+					headers: {
+						"Content-Type": contentType,
+					},
+				})
+			}
+			
+			return new Response("File not found", { status: 404 })
+		},
 	},
-  
 
 	development: process.env.NODE_ENV !== "production" && {
 		// Enable browser hot reloading in development
