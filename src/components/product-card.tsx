@@ -2,7 +2,7 @@ export default function ProductCard({ product }: { product: any }) {
 	return (
 		<a href={product.url} className="bg-slate-200 rounded-lg max-w-[450px]">
 			<img
-				src={product.image}
+				data-src={product.image}
 				alt={product.title}
 				className="w-full h-auto max-h-64 object-cover rounded-tl-lg rounded-tr -lg shadow-lg"
 			/>

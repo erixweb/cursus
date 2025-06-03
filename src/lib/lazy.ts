@@ -22,4 +22,10 @@ export function lazyLoadImages() {
 			observer.observe(img)
 		}
 	})
+	console.log(`Lazy loading ${images.length} images`)
 }
+
+window.addEventListener("load", () => {
+	// Initialize lazy loading after the window has loaded
+	lazyLoadImages()
+})
