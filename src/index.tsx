@@ -47,10 +47,6 @@ const server = serve({
 			return new Response("File not found", { status: 404 })
 		},
 	},
-	fetch(req) {
-		// Handle all other requests with the default fetch handler
-		return new Response("Not Found", { status: 404 })
-	},
 
 	development: process.env.NODE_ENV !== "production" && {
 		// Enable browser hot reloading in development
