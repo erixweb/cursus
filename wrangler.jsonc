@@ -1,0 +1,5 @@
+{
+  "name": "cursus",
+  "compatibility_date": "2025-06-04",
+  "main": "src/index.ts"
+}
