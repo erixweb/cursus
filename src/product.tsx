@@ -1,14 +1,15 @@
-import LazyImage from "./lazy-image";
+import "./index.css"
+import LazyImage from "./components/lazy-image.tsx"
 
-export default function ProductCard({ product }: { product: any }) {
+export function Product({ product }: { product: any }) {
 	return (
-		<a href={product.url} className="bg-slate-200 rounded-lg max-w-[450px]">
+		<main className="container w-full mx-auto p-8 text-center relative z-10 flex">
 			<LazyImage
 				src={product.image}
 				alt={product.title}
-				className="w-full h-auto max-h-64 object-cover rounded-tl-lg rounded-tr -lg shadow-lg"
+				className="w-full h-[100vh] max-h-[650px] object-cover rounded-lg shadow-lg"
 			/>
-			<div className="p-4">
+			<div className="p-4 w-full">
 				<h3 className="font-bold text-xl">{product.title}</h3>
 				<p className="text-gray-600 mt-5 mb-5">{product.weight}</p>
 				<span className="font-bold text-2xl">{product.price}</span>
@@ -31,6 +32,6 @@ export default function ProductCard({ product }: { product: any }) {
 					</p>
 				</div>
 			</div>
-		</a>
+		</main>
 	)
 }

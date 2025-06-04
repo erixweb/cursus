@@ -1,5 +1,5 @@
 import { Button } from "./ui/button"
-import HeaderImage from "@/food-header.avif"
+import HeaderImage from "@/food-header.avif";
 
 export default function Header() {
 	return (

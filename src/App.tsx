@@ -1,7 +1,6 @@
 import Header from "./components/header"
 import ProductCard from "./components/product-card"
 import "./index.css"
-import "@/lib/lazy.ts"
 
 export function App() {
 	return (

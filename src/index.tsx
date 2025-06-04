@@ -5,43 +5,47 @@ const server = serve({
 	routes: {
 		// Serve index.html for all unmatched routes.
 		"/*": index,
+		"/product/*": index,
+		"/product/:productId": async (req) => {
+			const productId: number = parseInt(req.params.productId)
 
-		"/api/hello": {
-			async GET(req) {
-				return Response.json({
-					message: "Hello, world!",
-					method: "GET",
-				})
-			},
-			async PUT(req) {
-				return Response.json({
-					message: "Hello, world!",
-					method: "PUT",
-				})
-			},
-		},
+			const products = await Bun.file(__dirname + "/data/products.json").json()
 
-		"/api/hello/:name": async (req) => {
-			const name = req.params.name
-			return Response.json({
-				message: `Hello, ${name}!`,
+			const product = products[productId - 1]
+
+			console.log(product)
+
+			if (!product) {
+				return new Response("Product not found", { status: 404 })
+			}
+			
+			return new Response(JSON.stringify(product), {
+				headers: {
+					"Content-Type": "application/json",
+					"Cache-Control": "public, max-age=3600",
+					"body": product,
+				},
 			})
 		},
 		// Serve static files from assets
 		"/assets/*": async (req) => {
-			const path = __dirname + ("./assets" + req.url.replace(new URL(req.url).origin + "/assets", "")).replace(".", "")
+			const path =
+				__dirname +
+				("./assets" + req.url.replace(new URL(req.url).origin + "/assets", "")).replace(
+					".",
+					""
+				)
 
-			
-			if (await (Bun.file(path).exists())) {
+			if (await Bun.file(path).exists()) {
 				const file = Bun.file(path)
-				const contentType = file.type;
+				const contentType = file.type
 				return new Response(await file.arrayBuffer(), {
 					headers: {
 						"Content-Type": contentType,
 					},
 				})
 			}
-			
+
 			return new Response("File not found", { status: 404 })
 		},
 	},
