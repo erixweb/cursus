@@ -13,8 +13,6 @@ const server = serve({
 
 			const product = products[productId - 1]
 
-			console.log(product)
-
 			if (!product) {
 				return new Response("Product not found", { status: 404 })
 			}
@@ -48,6 +46,10 @@ const server = serve({
 
 			return new Response("File not found", { status: 404 })
 		},
+	},
+	fetch(req) {
+		// Handle all other requests with the default fetch handler
+		return new Response("Not Found", { status: 404 })
 	},
 
 	development: process.env.NODE_ENV !== "production" && {
